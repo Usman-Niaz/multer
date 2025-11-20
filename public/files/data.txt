@@ -1,0 +1,14 @@
+Key Multer code components
+multer(options): This is the main function you'll use. It takes an options object to configure how Multer should handle uploads.
+storage: A configuration option within multer() that tells Multer how and where to store files.
+diskStorage: The most common storage engine, which saves files to the server's disk.
+destination: A function that defines the directory where files should be saved. It uses a callback cb(null, 'uploads/') to specify the path.
+filename: A function that determines the new name for the uploaded file. It's common to use a combination of Date.now() and the original filename to avoid naming conflicts (e.g., cb(null, Date.now() + file.originalname)).
+Middleware: Multer acts as middleware in Express routes, processing the file upload before the route's handler function is called.
+upload = multer({ storage: storage }): This line creates an instance of Multer with the defined storage options, preparing it to handle uploads.
+upload.single('file'): A method used in a route to handle a single file upload. The string argument, 'file', must match the name attribute of the file input field in the HTML form.
+upload.array('file'): A method for handling multiple files with the same name attribute.
+upload.fields([...]): A method for handling multiple files with different name attributes.
+Accessing files: After Multer processes the request, information about the uploaded files is attached to the request object.
+req.file: Contains information about a single uploaded file.
+req.files: Contains information about multiple uploaded files. 
